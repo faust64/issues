@@ -1,0 +1,12 @@
+var outages = [
+    {
+	what: 'general outage',
+	why: 'authentication service unavailable',
+	timeline: [
+	    { date: 1451556360, what: 'background worker restarting in a loop' },
+	    { date: 1451566500, what: 'problem identified, ElastiCache is full, pretty much everything involving auth tokens is affected' },
+	    { date: 1451566680, what: 'DR is not affected, route53 records updated, service back up' },
+	    { date: 1451579160, what: 'production ElastiCache fixed, server code patched' },
+	    { date: 1451580000, what: 'route53 records restored, new connections started moving back from DR to production' },
+	    { date: 1451624100, what: 'last client disconnected from DR, everyone is back on production' } ]
+    } ];

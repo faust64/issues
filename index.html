@@ -1,0 +1,82 @@
+<html>
+    <head>
+	<title>Outages</title>
+	<link rel="stylesheet" href="./inc/style.css" type="text/css" />
+	<script type='text/javascript' src='./inc/db.json'></script>
+	<script type='text/javascript'>
+function taildate(i, c) {
+    if (typeof(c)==='undefined') c = ' ';
+    return (i > 1 ? 's'+c : c);
+}
+
+function dateformat(how, when, since) {
+    var ret = '';
+
+    switch(how) {
+	case 'absolute':
+	    if (when != false) {
+		var d = new Date(when * 1000).toLocaleDateString();
+		var h = new Date(when * 1000).toLocaleTimeString();
+		ret = d + '<br/>' + h;
+	    }
+	    break;
+	case 'relative':
+	    if (when != false && since != false) {
+		if (when == since) {
+		    ret = '&nbsp;';
+		} else {
+		    var d = (when - since) / 86400;
+		    var h = ((when - since) % 86400) / 3600;
+		    var m = (((when - since) % 86400) % 3600) / 60;
+		    var s = ((((when - since) % 86400) % 3600) % 60);
+		    ret = 'T +';
+		    if (d >= 1) ret += Math.floor(d) + 'day' + taildate(d);
+		    ret += Math.floor(h) + ' hour' + taildate(h);
+		    if (m < 10) ret += '0';
+		    ret += m + ' minute' + taildate(m);
+		    if (d == 0 && s != 0) {
+			if (s < 10) ret += '0';
+			ret += s + ' second' + taildate(s, '');
+		    }
+		}
+	    }
+	    break;
+	default: break;
+    }
+
+    return ret;
+}
+
+function populate() {
+    var page = '<table>', container = document.getElementById('container');
+
+    for (var x = 0; x < outages.length; x++) {
+	page += '<tr><td id=\'outage\' rowspan=\''
+	     +  (outages[x].timeline.length + 1) + '\'><p id=\'title\'>'
+	     +  outages[x].what + '</p><p id=\'maindate\'>'
+	     +  dateformat('absolute', outages[x].timeline[0].date)
+	     +  '</p></td><td colspan=\'2\' id=\'descr\'>' + outages[x].why
+	     +  '</td>';
+	for (var y = 0; y < outages[x].timeline.length; y++) {
+	    page += '<tr><td id=\'timeline' + ((y % 2) ? 'odd' : 'even') + '\'>'
+		 +  '<p id=\'timeline' + ((y % 2) ? 'odd' : 'even') + '\'>'
+		 +  dateformat('relative', outages[x].timeline[y].date,
+				outages[x].timeline[0].date) + '</p></td>'
+		 +  '<td id=\'event' + ((y % 2) ? 'odd' : 'even') + '\'>'
+		 +  '<p id=\'event' + ((y % 2) ? 'odd' : 'even') + '\'>'
+		 +  outages[x].timeline[y].what + '</p></td></tr>';
+	}
+	page += '</tr>';
+    }
+    page += '</table>';
+
+    container.innerHTML = page;
+}
+	</script>
+    </head>
+    <body onLoad='populate();'>
+	<div id='header'></div>
+	<div id='container'></div>
+	<div id='footer'></div>
+    </body>
+</html>
