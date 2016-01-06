@@ -6,7 +6,7 @@
 	<script type='text/javascript'>
 function taildate(i, c) {
     if (typeof(c)==='undefined') c = ' ';
-    return (i > 1 ? 's'+c : c);
+    return (Math.floor(i) > 1 ? 's'+c : c);
 }
 
 function dateformat(how, when, since) {
@@ -47,24 +47,48 @@ function dateformat(how, when, since) {
     return ret;
 }
 
-function populate() {
-    var page = '<table>', container = document.getElementById('container');
+function populate(where, howmuch, startwith) {
+    var page = '<table>', container = document.getElementById('container'),
+	filtered = new Array();
 
-    for (var x = 0; x < outages.length; x++) {
+    for (var i = 0; i < outages.length; i++)
+	if (where == 'all' || where == outages[i].where)
+	    filtered.push(outages[i]);
+
+    if (filtered.length - 1 > howmuch) {
+	page += '<tr><td id=\'navleft\'>';
+	if (startwith > 0) {
+	    var to = (startwith - howmuch >= 0 ? startwith - howmuch : 0);
+	    page += '<a onclick=\'populate("' + where + '", ' + howmuch + ', ' + to + ');\'>&lt;</a>';
+	} else {
+	    page += '&nbsp;'
+	}
+	page += '</td><td=id=\'navcenter\'>&nbsp;</td><td id=\'navright\'>';
+	if (startwith + howmuch < filtered.length - 1) {
+	    var to = startwith + howmuch;
+	    page += '<a onclick=\'populate("' + where + '", ' + howmuch + ', ' + to + ');\'>&gt;</a>';
+	} else {
+	    page += '&nbsp;'
+	}
+	page += '</td></tr>';
+    }
+
+    for (var x = startwith;
+	(x < filtered.length && x - startwith < howmuch); x++) {
 	page += '<tr><td id=\'outage\' rowspan=\''
-	     +  (outages[x].timeline.length + 1) + '\'><p id=\'title\'>'
-	     +  outages[x].what + '</p><p id=\'maindate\'>'
-	     +  dateformat('absolute', outages[x].timeline[0].date)
-	     +  '</p></td><td colspan=\'2\' id=\'descr\'>' + outages[x].why
-	     +  '</td>';
-	for (var y = 0; y < outages[x].timeline.length; y++) {
+	     +  (filtered[x].timeline.length + 1) + '\'><p id=\'title\'>'
+	     +  filtered[x].what + '</p><p id=\'maindate\'>'
+	     +  dateformat('absolute', filtered[x].timeline[0].date)
+	     +  '</p><p id=\'environ\'>' + filtered[x].where + '</p></td><td '
+	     +  'colspan=\'2\' id=\'descr\'>' + filtered[x].why + '</td>';
+	for (var y = 0; y < filtered[x].timeline.length; y++) {
 	    page += '<tr><td id=\'timeline' + ((y % 2) ? 'odd' : 'even') + '\'>'
 		 +  '<p id=\'timeline' + ((y % 2) ? 'odd' : 'even') + '\'>'
-		 +  dateformat('relative', outages[x].timeline[y].date,
-				outages[x].timeline[0].date) + '</p></td>'
+		 +  dateformat('relative', filtered[x].timeline[y].date,
+				filtered[x].timeline[0].date) + '</p></td>'
 		 +  '<td id=\'event' + ((y % 2) ? 'odd' : 'even') + '\'>'
 		 +  '<p id=\'event' + ((y % 2) ? 'odd' : 'even') + '\'>'
-		 +  outages[x].timeline[y].what + '</p></td></tr>';
+		 +  filtered[x].timeline[y].what + '</p></td></tr>';
 	}
 	page += '</tr>';
     }
@@ -74,7 +98,7 @@ function populate() {
 }
 	</script>
     </head>
-    <body onLoad='populate();'>
+    <body onLoad='populate("aws_prod", 10, 0);'>
 	<div id='header'></div>
 	<div id='container'></div>
 	<div id='footer'></div>

@@ -1,6 +1,7 @@
 var outages = [
     {
 	what: 'general outage',
+	where: 'aws_prod',
 	why: 'authentication service unavailable',
 	timeline: [
 	    { date: 1451556360, what: 'background worker restarting in a loop' },
@@ -9,4 +10,14 @@ var outages = [
 	    { date: 1451579160, what: 'production ElastiCache fixed, server code patched' },
 	    { date: 1451580000, what: 'route53 records restored, new connections started moving back from DR to production' },
 	    { date: 1451624100, what: 'last client disconnected from DR, everyone is back on production' } ]
+    }, {
+	what: 'codedeploy almost-gedon',
+	where: 'staging',
+	why: 'disks inode usage reaching 99%',
+	timeline: [
+	    { date: 1452032580, what: 'munin graphs showing inode usage reached 90% on our background staging worker' },
+	    { date: 1452039120, what: 'munin graphs showing inode usage reached 90% on our foreground staging worker' },
+	    { date: 1452118260, what: 'I finally notice munin reports 99% inode usage on both instances' },
+	    { date: 1452118860, what: 'after autopurging packages with no real effect, I identified the source of our problem:<br/>codedeploy backups piles up in /var/www/peerio-server/shared/backup.<br/>Purging backups from december freed 72% inodes - and 14G' },
+	    { date: 1452120360, what: 'quick fix to prevent this from happening again (<a href="https://github.com/PeerioTechnologies/peerio-ansible/commit/34185226fca8ee4a7145af39faa7ff262a17051c" target="_blank">1</a>, <a href="https://github.com/PeerioTechnologies/peerio-ansible/commit/e6b5ca4834c79260521703c73daff31db73c471e" target="_blank">2</a>)' } ]
     } ];
