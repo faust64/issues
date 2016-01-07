@@ -4,6 +4,7 @@ body {
 
 #outage {
     background-color: #164c69;
+    color: white;
     padding: 15px;
     text-align: center;
     text-transform: capitalize;
@@ -20,6 +21,7 @@ body {
 
 #descr {
     background-color: #164c69;
+    color: white;
     font-weight: bold;
     padding: 5px;
     text-align: center;
