@@ -20,4 +20,13 @@ var outages = [
 	    { date: 1452118260, what: 'I finally notice munin reports 99% inode usage on both instances' },
 	    { date: 1452118860, what: 'after autopurging packages with no real effect, I identified the source of our problem:<br/>codedeploy backups piles up in /var/www/peerio-server/shared/backup.<br/>Purging backups from december freed 72% inodes - and 14G' },
 	    { date: 1452120360, what: 'quick fix to prevent this from happening again (<a href="https://github.com/PeerioTechnologies/peerio-ansible/commit/34185226fca8ee4a7145af39faa7ff262a17051c" target="_blank">1</a>, <a href="https://github.com/PeerioTechnologies/peerio-ansible/commit/e6b5ca4834c79260521703c73daff31db73c471e" target="_blank">2</a>)' } ]
+    }, {
+	what: 'logs forwarding failure',
+	where: 'productiondr',
+	why: 'logstash service stopped responding',
+	timeline: [
+	    { date: 1452810780, what: 'nagios reports an unusual delay processing logs' },
+	    { date: 1452810900, what: 'service restarted, looking at the logs, no change' },
+	    { date: 1452814800, what: 'problem identified, logstash init script does not stop logstash process' },
+	    { date: 1452815040, what: 'logstash properly restarted, nagios confirms messages are being processed' } ]
     } ];
