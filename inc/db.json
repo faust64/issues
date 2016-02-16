@@ -29,4 +29,36 @@ var outages = [
 	    { date: 1452810900, what: 'service restarted, looking at the logs, no change' },
 	    { date: 1452814800, what: 'problem identified, logstash init script does not stop logstash process' },
 	    { date: 1452815040, what: 'logstash properly restarted, nagios confirms messages are being processed' } ]
+    }, {
+	what: 'riak host failure',
+	where: 'productiondr',
+	why: 'on-disk file corruption',
+	timeline: [
+	    { date: 1454870460, what: 'nagios reports host unreachable, our riak init node is actually rebooting' },
+	    { date: 1454875080, what: 'nagios reports host unreachable, our riak init node is rebooting again' },
+	    { date: 1454876760, what: 'nagios reports host unreachable, our riak init node is rebooting again' },
+	    { date: 1454925060, what: 'waking up, I notice a lot of CRC errors in riak logs' },
+	    { date: 1454943060, what: 'issued open with Basho' },
+	    { date: 1454957400, what: 'reply from Basho, explaining how to manually repair faulty objects' },
+	    { date: 1454957640, what: 'unable to apply Basho recommendations, as I could not find any corrupted object remaining' } ]
+    }, {
+	what: 'riak host failure',
+	where: 'productiondr',
+	why: 'on-disk file corruption',
+	timeline: [
+	    { date: 1455471660, what: 'nagios reports host unreachable, our riak init node is actually rebooting' },
+	    { date: 1455492900, what: 'nagios reports host unreachable, no reboot this time, host checks failing from AWS console' },
+	    { date: 1455527700, what: 'waking up, I notice nagios alerts, floh also warned me on slack' },
+	    { date: 1455527760, what: 'stopping our instance on AWS' },
+	    { date: 1455528780, what: 'issue opened with Basho' },
+	    { date: 1455530820, what: 'instance shows as stopped on AWS, restarting it' },
+	    { date: 1455531480, what: 'cluster back up and running, logs showing CRC errors occured, none that I could find after reboot' } ]
+    }, {
+	what: 'logs forwarding failure',
+	where: 'aws_prod',
+	why: 'logstash service stopped responding',
+	timeline: [
+	    { date: 1455582780, what: 'nagios reports an unusual delay processing logs' },
+	    { date: 1455614640, what: 'process killed, service restarted, looking at the logs, we are asked to check our AWS-ES credentials. configuration matches DR & staging, both restarted at the same time, both working.' },
+	    { date: 1455617280, what: 'I had to send production logs to a new index, keeping the rest of my AWS-ES backend configuration: no more error in our logs' } ]
     } ];
