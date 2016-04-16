@@ -61,4 +61,15 @@ var outages = [
 	    { date: 1455582780, what: 'nagios reports an unusual delay processing logs' },
 	    { date: 1455614640, what: 'process killed, service restarted, looking at the logs, we are asked to check our AWS-ES credentials. configuration matches DR & staging, both restarted at the same time, both working.' },
 	    { date: 1455617280, what: 'I had to send production logs to a new index, keeping the rest of my AWS-ES backend configuration: no more error in our logs' } ]
+    }, {
+	what: 'general outage',
+	where: 'productiondr',
+	why: 'lost 2 riak nodes in a couple minutes, while production is under maintenance / DR is acting as production',
+	timeline: [
+	    { date: 1460803620, what: 'nagios reports plan pending commit in 3 nodes and riak_check down in 2' },
+	    { date: 1460803680, what: 'acknowledged, I connect to our 5 nodes. Thankfully, they are still all up. Riak is stopped in two of them.' },
+	    { date: 1460803740, what: 'restarting riak on my first faulty node failed. Stopping then starting worked.' },
+	    { date: 1460803800, what: 'stopping then starting riak on my second node worked. Cluster shows healthy, leaving it alone.' },
+	    { date: 1460804580, what: 'checking the client, turns out my active session is frozen, while Vincent reports that he can not log in. Reloading the foreground workers fixed.' },
+	    { date: 1460804700, what: 'in doubt, reloading our schedule, background and filemgr workers as well.' } ]
     } ];
