@@ -1,0 +1,16 @@
+{
+  "name": "issues",
+  "author": "Samuel Martin Moro",
+  "description": "Peerio Issues Site",
+  "version": "0.0.1",
+  "dependencies": {
+    "shipit-cli": "latest",
+    "shipit-deploy": "latest"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
