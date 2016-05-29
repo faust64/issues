@@ -18,7 +18,7 @@ var outages = [
 	    { date: 1452032580, what: 'munin graphs showing inode usage reached 90% on our background staging worker' },
 	    { date: 1452039120, what: 'munin graphs showing inode usage reached 90% on our foreground staging worker' },
 	    { date: 1452118260, what: 'I finally notice munin reports 99% inode usage on both instances' },
-	    { date: 1452118860, what: 'after autopurging packages with no real effect, I identified the source of our problem:<br/>codedeploy backups piles up in /var/www/peerio-server/shared/backup.<br/>Purging backups from december freed 72% inodes - and 14G' },
+	    { date: 1452118860, what: 'after autopurging packages with no real effect, I identified the source of our problem:<br/>CodeDeploy backups piles up in /var/www/peerio-server/shared/backup.<br/>Purging backups from december freed 72% inodes - and 14G' },
 	    { date: 1452120360, what: 'quick fix to prevent this from happening again (<a href="https://github.com/PeerioTechnologies/peerio-ansible/commit/34185226fca8ee4a7145af39faa7ff262a17051c" target="_blank">1</a>, <a href="https://github.com/PeerioTechnologies/peerio-ansible/commit/e6b5ca4834c79260521703c73daff31db73c471e" target="_blank">2</a>).' } ]
     }, {
 	what: 'logs forwarding failure',
@@ -60,7 +60,7 @@ var outages = [
 	why: 'logstash service stopped responding',
 	timeline: [
 	    { date: 1455582780, what: 'nagios reports an unusual delay processing logs' },
-	    { date: 1455614640, what: 'process killed, service restarted, looking at the logs, we are asked to check our AWS-ES credentials. configuration matches DR & staging, both restarted at the same time, both working' },
+	    { date: 1455614640, what: 'process killed, service restarted, looking at the logs, we are asked to check our AWS-ES credentials.<br/>Configuration matches DR & staging, both restarted at the same time, both working' },
 	    { date: 1455617280, what: 'I had to send production logs to a new index, keeping the rest of my AWS-ES backend configuration: no more error in our logs' },
 	    { date: 1459695222, what: 'after a few flaps between logstash and AWS-ES, we finally installed our own elasticsearch cluster in EC2.' } ]
     }, {
@@ -93,11 +93,23 @@ var outages = [
 	    { date: 1464333288, what: 'health check returns unhealthy' },
 	    { date: 1464341837, what: 'adding debugs, restarting pm2 processes' },
 	    { date: 1464344092, what: 'health check returns unhealthy' },
-	    { date: 1464349157, what: 'our labs setup has no active users, resulting in our redis database having a single record. Add a high limit to redis average key size, since our check aims to ensure at least 10.000 keys can be created' },
+	    { date: 1464349157, what: 'our labs setup has no active users, resulting in our redis database having a single record.<br/>Add a high limit to redis average key size, since our check aims to ensure at least 10.000 keys can be created' },
 	    { date: 1464354805, what: 'health check returns unhealthy' },
 	    { date: 1464385903, what: 'adding debugs, restarting pm2 processes' },
 	    { date: 1464387219, what: 'health check returns unhealthy' },
 	    { date: 1464435398, what: 'adding debugs, restarting pm2 processes' },
 	    { date: 1464437532, what: 'health check returns unhealthy' },
 	    { date: 1464441933, what: 'problem fixed with a parseInt.' } ]
+    }, {
+	what: 'general api outage',
+	where: 'staging',
+	why: 'some AWS health checks returned faulty, resulting in our ASG trying to replace the foreground worker instance from our staging setup',
+	timeline: [
+	    { date: 1464548106, what: 'uptimeRobot, statusCake & icinga2 report staging is down' },
+	    { date: 1464549780, what: 'our faulty instance finally got replaced, ansible just started deploying the new one' },
+	    { date: 1464551520, what: 'CodeDeploy failed pushing the last known-to-be-stable version of peerio-server to our new worker' },
+	    { date: 1464551880, what: 'problem identified in our CodeDeploy init script, running on a blank instance' },
+	    { date: 1464552720, what: 'dropped the foreground ASG from our staging deployment group, deployed a fix to the remaining instance of that group' },
+	    { date: 1464553320, what: 'ansible finished configuring the new instance that will run our foreground worker on staging' },
+	    { date: 1464553767, what: 'done running CodeDeploy, service is back up.' } ]
     } ];
