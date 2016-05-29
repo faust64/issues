@@ -26,9 +26,9 @@ function dateformat(how, when, since) {
 		    ret = '&nbsp;';
 		} else {
 		    var d = (when - since) / 86400;
-		    var h = ((when - since) % 86400) / 3600;
-		    var m = (((when - since) % 86400) % 3600) / 60;
-		    var s = ((((when - since) % 86400) % 3600) % 60);
+		    var h = Math.round(((when - since) % 86400) / 3600);
+		    var m = Math.round((((when - since) % 86400) % 3600) / 60);
+		    var s = Math.round(((((when - since) % 86400) % 3600) % 60));
 		    ret = 'T +';
 		    if (d >= 1) ret += Math.floor(d) + 'day' + taildate(d);
 		    ret += Math.floor(h) + ' hour' + taildate(h);
