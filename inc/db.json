@@ -107,6 +107,7 @@ var outages = [
 	timeline: [
 	    { date: 1464548106, what: 'uptimeRobot, statusCake & icinga2 report staging is down' },
 	    { date: 1464549780, what: 'our faulty instance finally got replaced, ansible just started deploying the new one' },
+	    { date: 1464551139, what: 'mail received from AWS, notifying us about a hardware failure on the host running our instance that just disappeared' },
 	    { date: 1464551520, what: 'CodeDeploy failed pushing the last known-to-be-stable version of peerio-server to our new worker' },
 	    { date: 1464551880, what: 'problem identified in our CodeDeploy init script, running on a blank instance' },
 	    { date: 1464552720, what: 'dropped the foreground ASG from our staging deployment group, deployed a fix to the remaining instance of that group' },
