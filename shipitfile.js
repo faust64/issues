@@ -14,9 +14,13 @@ module.exports = function (shipit) {
 		keepReleases: 2,
 		shallowClone: false
 	    },
-	    production: {
+	    aws_prod: {
 		branch: 'master',
-		servers: [{ user: process.env.USER || 'undefined', host: '10.71.100.15', port: 222 }]
+		servers: [{ user: process.env.USER || 'undefined', host: '10.71.100.223', port: 222 }]
+	    },
+	    staging: {
+		branch: 'master',
+		servers: [{ user: process.env.USER || 'undefined', host: '10.255.100.223', port: 222 }]
 	    }
 	});
 
@@ -25,6 +29,9 @@ module.exports = function (shipit) {
 	});
 
     shipit.task('permissions', function() {
-	    return shipit.remote('(chmod -R g+w /var/www/issues/releases || chmod -R g+w /var/www/issues/releases/* || true ) >/dev/null 2>&1');
+	    return shipit.remote('(chmod -R g+w /var/www/issues/releases || chmod -R g+w /var/www/issues/releases/* || true ) >/dev/null 2>&1 && '
+				 + 'hostname -f | grep staging >/dev/null && '
+				 + "sed -i 's|populate(\"aws_prod\",|populate(\"all\",|' /var/www/issues/current/index.html || "
+				 + 'true');
 	});
 };

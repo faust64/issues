@@ -18,5 +18,5 @@ ship:	dependencies test
 	if test "$$NODE_ENV"; then \
 	    ./node_modules/.bin/shipit $$NODE_ENV deploy; \
 	else \
-	    ./node_modules/.bin/shipit production deploy; \
+	    ./node_modules/.bin/shipit staging deploy; \
 	fi
