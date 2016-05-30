@@ -11,7 +11,7 @@ dependencies:
 	fi
 
 test:
-	js -c ./inc/db.json
+	js -c ./inc/db.js
 
 ship:	dependencies test
 	rm -fr tmp; \
