@@ -9,7 +9,7 @@ module.exports = function (shipit) {
 		dirToCopy: './',
 		deployTo: '/var/www/issues',
 		repositoryUrl: 'git@github.com:faust64/issues.git',
-		ignores: ['.git', 'node_modules', 'dev', 'src'],
+		ignores: ['.git', '.gititnore', 'package.json', 'shipitfile.js', 'README.md', 'node_modules'],
 		rsync: ['--del'],
 		keepReleases: 2,
 		shallowClone: false
