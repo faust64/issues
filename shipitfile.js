@@ -18,6 +18,10 @@ module.exports = function (shipit) {
 		branch: 'master',
 		servers: [{ user: process.env.USER || 'undefined', host: '10.71.100.223', port: 222 }]
 	    },
+	    dr: {
+		branch: 'master',
+		servers: [{ user: process.env.USER || 'undefined', host: '10.81.100.223', port: 222 }]
+	    },
 	    staging: {
 		branch: 'master',
 		servers: [{ user: process.env.USER || 'undefined', host: '10.255.100.223', port: 222 }]
