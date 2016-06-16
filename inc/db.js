@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'mysql node down',
+	where: 'productiondr',
+	why: 'probably some hardware failure on AWS part',
+	timeline: [
+	    { date: 1466037840, what: 'icinga2 reports one of our mysql node is down. No incidence on service whatsoever' },
+	    { date: 1466038020, what: 'trying to stop our faulty VM from AWS console' },
+	    { date: 1466038440, what: 'instance stopped. Starting it back' },
+	    { date: 1466038560, what: 'node back up, cluster is back to 3 nodes.' } ]
+    }, {
 	what: 'general api outage',
 	where: 'staging',
 	why: 'some AWS health checks returned faulty, resulting in our ASG trying to replace the foreground worker instance from our staging setup',
