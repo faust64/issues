@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 'partial api outage',
+	where: 'productiondr',
+	why: 'scheduled replacement of our redis master',
+	timeline: [
+	    { date: 1466445780, what: 'icinga reports one of our load-balancer is returning with 503 errors, route53 did the job as StatusCake and UptimeRobot both show a 100% uptime on DR' },
+	    { date: 1466470920, what: 'noticing the warning, turns out one of our websocket worker is neither dead nor alive' },
+	    { date: 1466470980, what: 'AWS did warn us a while ago, that they would be replacing the master instance from our ElastiCache cluster. Reloading our NodeJS process fixed. Pending further investigations as per why that process did not crash as expected.' } ]
+    }, {
 	what: 'mysql node down',
 	where: 'productiondr',
 	why: 'probably some hardware failure on AWS part',
