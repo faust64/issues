@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 'logs collection outage',
+	where: 'aws_prod',
+	why: 'unscheduled termination of our logstash instance',
+	timeline: [
+	    { date: 1466699220, what: 'icinga2 reports our production logstash instance is down. No incidence on service whatsoever' },
+	    { date: 1466699400, what: 'logging into aws console, we can confirm the corresponding EC2 instance is being terminated. No explanation available. The corresponding AutoScale Group already spawned a replacement instance, we just need to wait for Ansible to do its job' },
+	    { date: 1466700360, what: 'situation is back to normal.' } ]
+    }, {
 	what: 'partial api outage',
 	where: 'productiondr',
 	why: 'scheduled replacement of our redis master',
