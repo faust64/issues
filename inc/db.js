@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 'notifications outage',
+	where: 'productiondr',
+	why: 'slack outage',
+	timeline: [
+	    { date: 1467233880, what: 'having started a deployment to our DR setup, I was unable to connect to slack' },
+	    { date: 1467234000, what: 'I am able to connect from my phone, although we did not receive a single notification' },
+	    { date: 1467234240, what: 'Situation is back to normal, although half of our deployment notifications and monitoring alerts got lost. We would need to detect this and eventually go back to sending SMS notifications in such cases.' } ]
+    }, {
 	what: 'logs collection outage',
 	where: 'aws_prod',
 	why: 'unscheduled termination of our logstash instance',
