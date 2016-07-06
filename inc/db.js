@@ -1,5 +1,17 @@
 var outages = [
     {
+	what: 'public site partial outage',
+	where: 'aws_prod',
+	why: 'an EC2 instance stopped responding',
+	timeline: [
+	    { date: 1467806640, what: 'icinga2 notifies us that our site instance stopped responding to ICMP requests. CloudFlare allowed us to configure www.peerio.com as a CNAME to some Route53-managed name, whereas peerio.com is an A record. Our site was served from DR for users querying www.peerio.com, not those accessing peerio.com' },
+	    { date: 1467806820, what: 'AWS shows our unresponsive instance as unhealthy. Stopping it from their console, updating CloudFlare records to have peerio.com pointing to our DR setup' },
+	    { date: 1467808320, what: 'our production instance still shows as stopping, running stop again (force-stop)' },
+	    { date: 1467808860, what: 'our production instance now shows as stopped. Starting it back' },
+	    { date: 1467808980, what: 'our production instance is back up. Updating Route53\'s health check and hosted zones referring to our new production IP' },
+	    { date: 1467809280, what: 'Route53 health checks confirm our production instance is healthy, setting back peerio.com record on CloudFlare to our production instance' },
+	    { date: 1467809640, what: 'setting up Page Rules in CloudFlare, rewriting queries for peerio.com to www.peerio.com.' } ]
+    }, {
 	what: 'notifications outage',
 	where: 'productiondr',
 	why: 'slack outage',
