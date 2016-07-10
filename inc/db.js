@@ -1,5 +1,18 @@
 var outages = [
     {
+	what: 'general api outage',
+	where: 'staging',
+	why: 'our foreground ASG replaced its single instance, while the template being referred to in the corresponding LC was faulty',
+	timeline: [
+	    { date: 1468104120, what: 'uptimeRobot, statusCake & icinga2 report staging is down' },
+	    { date: 1468127580, what: 'I wake up to realize our foreground ASG in staging has been replacing instances in a loop for several hours. I connect to the instance currently booting' },
+	    { date: 1468128540, what: 'It appears CodeDeploy is invoking apt a little before our rc.local cuisine, which most of the time prevents ansible from starting. Still, 12 instances did report starting applying our ansible playbooks' },
+	    { date: 1468130880, what: 'After building a new AMI purging CodeDeploy agent, creating a new LC, updating our faulty ASG, a new instance starts to boot' },
+	    { date: 1468132320, what: 'Instance is properly deployed, CodeDeploy is installed and starts once NodeJS, pm2 & nginx are pre-configured, the last working version of peerio-server was properly deployed, service is back up' },
+	    { date: 1468140480, what: 'Boot time was longer than intended: after building an other AMI with more pre-installed packages, booting a new instance' },
+	    { date: 1468140960, what: 'done booting. Replacing all LC referring to our faulty AMI' },
+	    { date: 1468151100, what: 'done cleaning up.' } ]
+    }, {
 	what: 'public site partial outage',
 	where: 'aws_prod',
 	why: 'an EC2 instance stopped responding',
