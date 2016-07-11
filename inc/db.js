@@ -7,9 +7,9 @@ var outages = [
 	    { date: 1468265580, what: 'icinga2 reports our shark worker stopped responding' },
 	    { date: 1468265640, what: 'replacement instance is starting on EC2' },
 	    { date: 1468265820, what: 'system is booted, ansible notifies us it is configuring our new instance' },
-	    { date: 1468266360, what: 'ansible notifies system is configured' },
+	    { date: 1468266360, what: 'ansible notifies us our new system is configured' },
 	    { date: 1468266540, what: 'codedeploy notifies us the last working version of our accounts management site was properly deployed to our new instance' },
-	    { date: 1468266600, what: 'our monitoring is back to green.' } ]
+	    { date: 1468266600, what: 'haproxy detected our new backend as healthy, our monitoring is back to green.' } ]
     }, {
 	what: 'public blobs partial outage',
 	where: 'aws_prod',
