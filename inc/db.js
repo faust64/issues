@@ -1,5 +1,16 @@
 var outages = [
     {
+	what: 'accounts management portal unavailable',
+	where: 'staging',
+	why: 'unscheduled termination of our shark instance',
+	timeline: [
+	    { date: 1468265580, what: 'icinga2 reports our shark worker stopped responding' },
+	    { date: 1468265640, what: 'replacement instance is starting on EC2' },
+	    { date: 1468265820, what: 'system is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1468266360, what: 'ansible notifies system is configured' },
+	    { date: 1468266540, what: 'codedeploy notifies us the last working version of our accounts management site was properly deployed to our new instance' },
+	    { date: 1468266600, what: 'our monitoring is back to green.' } ]
+    }, {
 	what: 'public blobs partial outage',
 	where: 'aws_prod',
 	why: 'packet losses one of our loadbalancer serving blob.peerio.com (files)',
@@ -14,7 +25,7 @@ var outages = [
     }, {
 	what: 'general api outage',
 	where: 'staging',
-	why: 'our foreground ASG replaced its single instance, while the template being referred to in the corresponding LC was faulty',
+	why: 'unscheduled termination of our foreground instance, while the template being referred to in the corresponding LC was faulty',
 	timeline: [
 	    { date: 1468104120, what: 'uptimeRobot, statusCake & icinga2 report staging is down' },
 	    { date: 1468127580, what: 'I wake up to realize our foreground ASG in staging has been replacing instances in a loop for several hours. I connect to the instance currently booting' },
