@@ -1,5 +1,17 @@
 var outages = [
     {
+	what: 'public blobs partial outage',
+	where: 'aws_prod',
+	why: 'packet losses one of our loadbalancer serving blob.peerio.com (files)',
+	timeline: [
+	    { date: 1468253880, what: 'icinga2 reports several probes recovering on one of our front balancer serving blob.peerio.com' },
+	    { date: 1468253940, what: 'everything looks fine, keeping a top running in doubt' },
+	    { date: 1468254600, what: 'icinga2 reports an other bunch of recoveries. My shell is mostly unresponsive. Smokeping confirms up to 29% packet losses to this instance' },
+	    { date: 1468254660, what: 'I can confirm Route53 is no longer routing queries to blob.peerio.com to this server' },
+	    { date: 1468254900, what: 'Smokeping confirms we are no longer suffering from these network losses, Route53 is routing back clients to this balancer' },
+	    { date: 1468256100, what: 'icinga2 reports an other bunch of recoveries. Smokeping confirm losses again, although more discrete' },
+	    { date: 1468256580, what: 'Smokeping confirms we are no longer suffering from these network losses.' } ]
+    }, {
 	what: 'general api outage',
 	where: 'staging',
 	why: 'our foreground ASG replaced its single instance, while the template being referred to in the corresponding LC was faulty',
