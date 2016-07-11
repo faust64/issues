@@ -20,7 +20,7 @@ var outages = [
 	    { date: 1468254600, what: 'icinga2 reports an other bunch of recoveries. My shell is mostly unresponsive. Smokeping confirms up to 29% packet losses to this instance' },
 	    { date: 1468254660, what: 'I can confirm Route53 is no longer routing queries to blob.peerio.com to this server' },
 	    { date: 1468254900, what: 'Smokeping confirms we are no longer suffering from these network losses, Route53 is routing back clients to this balancer' },
-	    { date: 1468256100, what: 'icinga2 reports an other bunch of recoveries. Smokeping confirm losses again, although more discrete' },
+	    { date: 1468256100, what: 'icinga2 reports an other bunch of recoveries. Smokeping confirms losses again, although more discrete' },
 	    { date: 1468256580, what: 'Smokeping confirms we are no longer suffering from these network losses.' } ]
     }, {
 	what: 'general api outage',
