@@ -1,5 +1,24 @@
 var outages = [
     {
+	what: 'public blobs outage',
+	where: 'staging',
+	why: 'unscheduled termination of our blob instance',
+	timeline: [
+	    { date: 1468380240, what: 'icinga2 reports our blob worker stopped responding' },
+	    { date: 1468380600, what: 'system is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1468381140, what: 'codedeploy starts deploying peerio-server, peerio-inferno and peerio-haunted-house to our new instance' },
+	    { date: 1468381560, what: 'ansible notifies us our new system is configured' },
+	    { date: 1468381920, what: 'codedeploy terminates our new instances, not being able to deploy peerio-inferno and peerio-haunted-house' },
+	    { date: 1468382160, what: 'having disabled inferno and haunted house deployments, new system is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1468382760, what: 'codedeploy starts deploying peerio-server to our new instance' },
+	    { date: 1468382880, what: 'codedeploy is done restoring peerio-server' },
+	    { date: 1468383300, what: 'ansible notifies us our new system is configured' },
+	    { date: 1468384020, what: 'after a couple fixes to our repository, peerio-haunted-house is deployed back to our new instance' },
+	    { date: 1468384260, what: 'after a couple fixes to our repository, peerio-inferno is deployed back to our new instance' },
+	    { date: 1468384380, what: 'haproxy detected our new backend as healthy, our monitoring is back to green, re-enabling peerio-inferno and peerio-haunted-house deployments' },
+	    { date: 1468385700, what: 'shipped peerio-haunted-house latest changes to production' },
+	    { date: 1468386240, what: 'shipped peerio-inferno latest changes to production.' } ]
+    }, {
 	what: 'accounts management portal unavailable',
 	where: 'staging',
 	why: 'unscheduled termination of our shark instance',
