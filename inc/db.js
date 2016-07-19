@@ -1,5 +1,16 @@
 var outages = [
     {
+	what: 'ghosts outage',
+	where: 'staging',
+	why: 'unscheduled termination of our inferno instance',
+	timeline: [
+	    { date: 1468961160, what: 'icinga2 reports our ghost worker stopped responding' },
+	    { date: 1468961460, what: 'system is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1468961820, what: 'codedeploy starts deploying peerio-inferno to our new instance' },
+	    { date: 1468961940, what: 'codedeploy is done installing peerio-inferno' },
+	    { date: 1468961960, what: 'haproxy detected its new backend, ghosts is back online' },
+	    { date: 1468962120, what: 'ansible notifies us our new system is configured.' } ]
+    }, {
 	what: 'public blobs outage',
 	where: 'staging',
 	why: 'unscheduled termination of our blob instance',
