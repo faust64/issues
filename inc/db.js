@@ -1,5 +1,18 @@
 var outages = [
     {
+	what: 'accounts management portal partial outage',
+	where: 'aws_prod',
+	why: 'unscheduled termination of a loadbalancer serving accounts.peerio.com',
+	timeline: [
+	    { date: 1469173020, what: 'icinga2 notifies us several probes started flapping' },
+	    { date: 1469173080, what: 'icinga2 sends us an other bunch of recovery notifications' },
+	    { date: 1469174880, what: 'icinga2 sends us a third bunch of notifications regarding this loadbalancer' },
+	    { date: 1469175000, what: 'icinga2 reports this loadbalancer finally stopped responding' },
+	    { date: 1469175240, what: 'system is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1469175840, what: 'ansible notifies us our new system is configured' },
+	    { date: 1469182380, what: 'waking up, I confirm ansible properly registered a new health check and matching DNS record to route53, haproxy is properly relaying' },
+	    { date: 1469182740, what: 'dropping the DNS record and healthcheck corresponding to our former balancer. StatusCake & UptimeRobot report 100% uptime, as our production is based on pairs of instances, and Route53 did its job.' } ]
+    }, {
 	what: 'ghosts outage',
 	where: 'staging',
 	why: 'unscheduled termination of our inferno instance',
