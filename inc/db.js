@@ -1,5 +1,25 @@
 var outages = [
     {
+	what: 'DR general outage',
+	where: 'productiondr',
+	why: 'unscheduled termination of the loadbalancer in front of our DR riak cluster',
+	timeline: [
+	    { date: 1469598600, what: 'icinga2 notifies us several probes started flapping' },
+	    { date: 1469599020, what: 'StatusCake notifies us our ghosts gateway is down on DR' },
+	    { date: 1469599080, what: 'icinga2 notifies us our riak balancer on DR is down' },
+	    { date: 1469599500, what: 'replacement instance is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1469599560, what: 'StatusCake notifies us our api gateway is down on DR' },
+	    { date: 1469599620, what: 'StatusCake notifies us our files gateway is down on DR' },
+	    { date: 1469599920, what: 'ansible notifies us our new instance is up and running, although our workers are still trying and failing to connect to their former backend' },
+	    { date: 1469605920, what: 'awaken by notifications, I start an ELB in front of our riak cluster' },
+	    { date: 1469606160, what: 'new ELB up and running, updating our worker runtime variables, then scheduling a new deployment of peerio-server' },
+	    { date: 1469607060, what: 'StatusCake notifies us our api gateway is back up' },
+	    { date: 1469607120, what: 'StatusCake notifies us our files gateway is back up' },
+	    { date: 1469607180, what: 'CodeDeploy notifies us peerio-server deployment is done, scheduling a new deployment of peerio-inferno' },
+	    { date: 1469607960, what: 'CodeDeploy notifies us peerio-inferno deployment is done' },
+	    { date: 1469608200, what: 'StatusCake notifies us our ghosts gateway is back up' },
+	    { date: 1469610000, what: 'shut down our haproxy ASG in front of riak: dynamic IPs without some DNS to be used from our workers is doomed to fail.' } ]
+    }, {
 	what: 'accounts management portal partial outage',
 	where: 'aws_prod',
 	why: 'unscheduled termination of a loadbalancer serving accounts.peerio.com',
