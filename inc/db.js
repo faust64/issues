@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'DR partial outage',
+	where: 'productiondr',
+	why: 'unscheduled termination of our background worker, in charge of sending mail and sms notifications',
+	timeline: [
+	    { date: 1473100920, what: 'icinga2 notifies us our background worker is down on DR. No implication for end users, as DR is not active' },
+	    { date: 1473101880, what: 'replacement instance is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1473102240, what: 'CodeDeploy notifies us peerio-server deployment is done' },
+	    { date: 1473102540, what: 'ansible notifies us our instance is fully configured.' } ]
+    }, {
 	what: 'DR general outage',
 	where: 'productiondr',
 	why: 'unscheduled termination of the loadbalancer in front of our DR riak cluster',
