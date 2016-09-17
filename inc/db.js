@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'riak partial outage',
+	where: 'aws_prod',
+	why: 'unscheduled termination of one of our riak node, with no real incidence on production',
+	timeline: [
+	    { date: 1474136700, what: 'nagios reports a couple socket timeouts reaching one of our riak node, before reporting us that instance was down' },
+	    { date: 1474136880, what: 'new instance is listed as starting on aws console' },
+	    { date: 1474137060, what: 'ansible notifies us it started configuring our new instance' },
+	    { date: 1474138440, what: 'faulty node removed from our riak cluster, new node added, plan change committed' },
+	    { date: 1474138560, what: 'riak balancers configuration updated, forwarding traffic to our new node.' } ]
+    }, {
 	what: 'DR partial outage',
 	where: 'productiondr',
 	why: 'unscheduled termination of our background worker, in charge of sending mail and sms notifications',
