@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'partial api outage',
+	where: 'aws_prod',
+	why: 'network losses on us-east-1',
+	timeline: [
+	    { date: 1474890300, what: 'icinga reports several production services as recovered or flapping, our status page confirms our service is down' },
+	    { date: 1474890780, what: 'noticing these alerts, I start looking at our logs. Our workers are losing connectivity to Azure, our Balancers to our Workers, .... pretty much all our services are suffering from network losses' },
+	    { date: 1474891620, what: 'Route53 records changed forcing all traffic to DR, as our current health checks are flapping from one env to the other' },
+	    { date: 1474892220, what: 'our last flapping services are now showing as recovered. It looks like we no longer suffer from network losses' },
+	    { date: 1474962300, what: 'Route53 records restored, pending re-viewing our health checks.' } ]
+    }, {
 	what: 'riak partial outage',
 	where: 'aws_prod',
 	why: 'unscheduled termination of one of our riak node, with no real incidence on production',
