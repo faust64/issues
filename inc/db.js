@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'partial site outage',
+	where: 'productiondr',
+	why: 'DR site instance stopped responding',
+	timeline: [
+	    { date: 1475494620, what: 'icinga reports several checks timing out against our site instance' },
+	    { date: 1475494660, what: 'stopping site instance from the aws console' },
+	    { date: 1475496300, what: 'site instance stopped, starting it back' },
+	    { date: 1475496360, what: 'instance is back up' },
+	    { date: 1475496660, what: 'Route53 health checks shows back as healthy on DR.' } ]
+    }, {
 	what: 'partial api outage',
 	where: 'aws_prod',
 	why: 'network losses on us-east-1',
