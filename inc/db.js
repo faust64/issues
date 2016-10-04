@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'blob outage',
+	where: 'productiondr',
+	why: 'DR blob loadbalancer instance stopped responding',
+	timeline: [
+	    { date: 1475601900, what: 'icinga reports several checks timing out against our blob loadbalancer instance' },
+	    { date: 1475601960, what: 'instance shows as stompping from the aws console, waiting for its replacement' },
+	    { date: 1475602260, what: 'new instance booted, ansible starting to configure' },
+	    { date: 1475603640, what: 'ansible done configuring haproxy' },
+	    { date: 1475603880, what: 'Route53 health checks shows back as healthy.' } ]
+    }, {
 	what: 'partial site outage',
 	where: 'productiondr',
 	why: 'DR site instance stopped responding',
