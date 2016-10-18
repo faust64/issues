@@ -1,11 +1,21 @@
 var outages = [
     {
+	what: 'replication outage',
+	where: 'productiondr',
+	why: 'DR ipsec gateway stopped responding',
+	timeline: [
+	    { date: 1476738600, what: 'icinga reports all our checks as timing out, then eventually all instances as down, although there is only one notification per check: the problem lies on our IPSEC tunnel being down' },
+	    { date: 1476738660, what: 'instance shows as unhealthy from the aws console. Forcing it to shut down' },
+	    { date: 1476739140, what: 'instance stopped, starting it back' },
+	    { date: 1476739500, what: 'IPSEC tunnels back up' },
+	    { date: 1476739740, what: 'done confirming that our replicated services recovered from our connection loss.' } ]
+    }, {
 	what: 'blob outage',
 	where: 'productiondr',
 	why: 'DR blob loadbalancer instance stopped responding',
 	timeline: [
 	    { date: 1475601900, what: 'icinga reports several checks timing out against our blob loadbalancer instance' },
-	    { date: 1475601960, what: 'instance shows as stompping from the aws console, waiting for its replacement' },
+	    { date: 1475601960, what: 'instance shows as stopping from the aws console, waiting for its replacement' },
 	    { date: 1475602260, what: 'new instance booted, ansible starting to configure' },
 	    { date: 1475603640, what: 'ansible done configuring haproxy' },
 	    { date: 1475603880, what: 'Route53 health checks shows back as healthy.' } ]
