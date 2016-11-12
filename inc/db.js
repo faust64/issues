@@ -1,11 +1,22 @@
 var outages = [
     {
+	what: 'riak outage',
+	where: 'ice-bear',
+	why: 'Shortly after importing Riak database dump, lost connectivity to three out of four ring members',
+	timeline: [
+	    { date: 1478543640, what: 'icinga starts reporting checks as timing out, then eventually 3 out of 4 Riak nodes as down' },
+	    { date: 1478543760, what: 'instances show as healthy from aws console. Detaching faulty instances from their ASG. Forcing them to shut down' },
+	    { date: 1478543820, what: 'StatusCake reports our Riak-based staging services as down' },
+	    { date: 1478544180, what: 'instances stopped, starting them back' },
+	    { date: 1478544300, what: 'StatusCake starts reporting our faulty services as back up' },
+	    { date: 1478544540, what: 'monitoring back to green everywhere.' } ]
+    }, {
 	what: 'replication outage',
 	where: 'productiondr',
 	why: 'DR ipsec gateway stopped responding',
 	timeline: [
 	    { date: 1476738600, what: 'icinga reports all our checks as timing out, then eventually all instances as down, although there is only one notification per check: the problem lies on our IPSEC tunnel being down' },
-	    { date: 1476738660, what: 'instance shows as unhealthy from the aws console. Forcing it to shut down' },
+	    { date: 1476738660, what: 'instance shows as unhealthy from aws console. Forcing it to shut down' },
 	    { date: 1476739140, what: 'instance stopped, starting it back' },
 	    { date: 1476739500, what: 'IPSEC tunnels back up' },
 	    { date: 1476739740, what: 'done confirming that our replicated services recovered from our connection loss.' } ]
