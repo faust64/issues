@@ -1,5 +1,19 @@
 var outages = [
     {
+	what: 'riak partial outage',
+	where: 'ice-bear',
+	why: 'unscheduled termination of some Riak node',
+	timeline: [
+	    { date: 1478945280, what: 'icinga2 notifies us that some Riak node is down on staging. No implication for end users, as Riak can sustain a single node failure' },
+	    { date: 1478945400, what: 'replacement instance is booted, ansible notifies us it is configuring our new instance' },
+	    { date: 1478946300, what: 'initial deployment failed due to plan change error, after a 60 second sleep ansible tries again configuring our new instance' },
+	    { date: 1478946960, what: 'second deployment failed due to plan change error, after a 60 second sleep ansible tries again configuring our new instance' },
+	    { date: 1478947860, what: 'ansible notifies us our instance is fully configured' },
+	    { date: 1478949600, what: 'icinga2 notifies us our Riak cluster plan has pending changes we would either need to clear or apply' },
+	    { date: 1478959680, what: 'waking up, I notice some un-applied plan changes, dataset looks healthy although ring is not ready' },
+	    { date: 1478960520, what: 'clearing plan changes, marking faulty node as down, force-removing it then applying our changes' },
+	    { date: 1478960880, what: 'monitoring confirms Riak is healthy back.' } ]
+    }, {
 	what: 'riak outage',
 	where: 'ice-bear',
 	why: 'Shortly after importing Riak database dump, lost connectivity to three out of four ring members',
