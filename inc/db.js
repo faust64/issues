@@ -1,5 +1,16 @@
 var outages = [
     {
+	what: 'riak outage',
+	where: 'ice-bear',
+	why: 'unresponsive processes, unresponsive instance',
+	timeline: [
+	    { date: 1478983680, what: 'anri notify us that Staging stopped working. Shortly after, icinga confirms us that two out of three Riak processes stopped responding. Corresponding instances are still reachable, whereas the third one is responding to PING but refusing SSH connections' },
+	    { date: 1478984100, what: 'shutting down our third instance' },
+	    { date: 1478984280, what: 'instance shut down, starting it back' },
+	    { date: 1478984340, what: 'instance backup, meanwhile Riak was restarted on the two first instances. Cluster is back healthy' },
+	    { date: 1478984460, what: 'icinga confirms Riak balancer is forwarding traffic back' },
+	    { date: 1478985180, what: 'StatusCake confirms our frontends are showing healthy back.' } ]
+    }, {
 	what: 'riak partial outage',
 	where: 'ice-bear',
 	why: 'unscheduled termination of some Riak node',
