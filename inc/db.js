@@ -2,6 +2,15 @@ var outages = [
     {
 	what: 'riak outage',
 	where: 'ice-bear',
+	why: 'Riak crashed of some Riak node',
+	timeline: [
+	    { date: 1479133800, what: 'icinga2 notifies us that some Riak watchdog failed restarting Riak on staging. Since we shrunk our staging cluster down to 3 nodes, a single node failure is now critical for most our NodeJS services' },
+	    { date: 1479133840, what: 'having connected to the faulty node, Riak was indeed stopped. No problem restarting it' },
+	    { date: 1479133860, what: 'UptimeRobot notifies us some staging service became unavailable' },
+	    { date: 1479133920, what: 'UptimeRobot confirms service is back up.' } ]
+    }, {
+	what: 'riak outage',
+	where: 'ice-bear',
 	why: 'unresponsive processes, unresponsive instance',
 	timeline: [
 	    { date: 1478983680, what: 'anri notify us that Staging stopped working. Shortly after, icinga confirms us that two out of three Riak processes stopped responding. Corresponding instances are still reachable, whereas the third one is responding to PING but refusing SSH connections' },
