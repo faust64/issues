@@ -1,5 +1,16 @@
 var outages = [
     {
+	what: 'redis & riak outage',
+	where: 'ice-bear',
+	why: 'Redis database full, Riak instances unresponsive',
+	timeline: [
+	    { date: 1480335840, what: 'icinga2 notifies us that a couple Riak instances are unresponsive, and our redis memory usage is unusually high' },
+	    { date: 1480340820, what: 'UptimeRobot notifies us some staging service became unavailable' },
+	    { date: 1480342920, what: 'waking up, I boot a new ElastiCache cluster and reboot the faulty Riak nodes' },
+	    { date: 1480350720, what: 'processes are reloaded using our new cache cluster, Riak is back' },
+	    { date: 1480356960, what: 'purging former cache cluster and corresponding backups from AWS, purged from monitoring.' } ]
+    }, {
+
 	what: 'riak outage',
 	where: 'ice-bear',
 	why: 'Riak crashed on some Riak node',
