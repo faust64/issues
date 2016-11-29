@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'redis outage',
+	where: 'ice-bear',
+	why: 'Redis database full',
+	timeline: [
+	    { date: 1480434540, what: 'StatusCake notifies us our websocket service is unresponsive' },
+	    { date: 1480434900, what: 'identified our problem to be related with memory usage on ElastiCache, booting a new redis cluster' },
+	    { date: 1480436700, what: 'new cache cluster available, scheduling a new deployment reloading our runtime variables' },
+	    { date: 1480437960, what: 'processes are reloaded using our new cache cluster' },
+	    { date: 1480438680, what: 'former cache cluster and corresponding were purged from AWS and monitoring.' } ]
+    }, {
 	what: 'redis & riak outage',
 	where: 'ice-bear',
 	why: 'Redis database full, Riak instances unresponsive',
