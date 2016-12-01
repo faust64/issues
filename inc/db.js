@@ -1,5 +1,17 @@
 var outages = [
     {
+	what: 'replication outage',
+	where: 'productiondr',
+	why: 'DR ipsec gateway stopped responding',
+	timeline: [
+	    { date: 1480631880, what: 'icinga notifies us link from production to DR is down' },
+	    { date: 1480631940, what: 'identified our problem to be related with our DR ipsec instance being unresponsive' },
+	    { date: 1480632300, what: 'stopping the faulty instance from AWS console' },
+	    { date: 1480632360, what: 'starting our IPSEC gateway back' },
+	    { date: 1480632540, what: 'IPSEC are back up, Riak replication properly running' },
+	    { date: 1480632840, what: 'IPSEC connectivity lost. Instances are fine, restarting tunnels' },
+	    { date: 1480632900, what: 'IPSEC are back up, Riak replication properly running, keeping an eye on it.' } ]
+    }, {
 	what: 'redis outage',
 	where: 'ice-bear',
 	why: 'Redis database full',
