@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'websocket outage',
+	where: 'ice-bear',
+	why: 'Broken release successfully deployed',
+	timeline: [
+	    { date: 1481309580, what: 'UptimeRobot notifies us our websocket worker is returning with 502s. Connecting to our instance, it appears that a nodejs module is missing and fails to load, preventing our processes from starting' },
+	    { date: 1481310720, what: 'new version of peerio-server freezed, integration tests fixed to force loading that library we were missing' },
+	    { date: 1481311380, what: 'integration tests confirmed our new version is consistent, freezing/shipping a new version of peerio-backend' },
+	    { date: 1481312820, what: 'StatusCake is last to confirms service is back up' },
+	    { date: 1479212880, what: 'CodeDeploy acknowledges finishing deploying our fix to EC2.' } ]
+    }, {
 	what: 'replication outage',
 	where: 'productiondr',
 	why: 'DR ipsec gateway stopped responding',
@@ -32,7 +42,6 @@ var outages = [
 	    { date: 1480350720, what: 'processes are reloaded using our new cache cluster, Riak is back' },
 	    { date: 1480356960, what: 'purging former cache cluster and corresponding backups from AWS, purged from monitoring.' } ]
     }, {
-
 	what: 'riak outage',
 	where: 'ice-bear',
 	why: 'Riak crashed on some Riak node',
