@@ -2,6 +2,18 @@ var outages = [
     {
 	what: 'riak outage',
 	where: 'ice-bear',
+	why: 'Couple Riak instances are unresponsive',
+	timeline: [
+	    { date: 1481469840, what: 'Following an other upload test, we have now lost two Riak nodes, ssh no longer responds' },
+	    { date: 1481470560, what: 'Having logged into AWS console, detached our faulty instances from their ASG, we try shutting them down' },
+	    { date: 1481470680, what: 'First instances shows stopped, starting it back' },
+	    { date: 1481470920, what: 'Riak loadbalancer shows healthy again, our front workers should be able to work from there' },
+	    { date: 1481471040, what: 'Second instance shows stopped, starting it back' },
+	    { date: 1481471100, what: 'Re-attaching our Riak nodes to their ASG' },
+	    { date: 1481471160, what: 'UptimeRobot confirms service is back up.' } ]
+    }, {
+	what: 'riak outage',
+	where: 'ice-bear',
 	why: 'Riak crashed on some Riak node, couple other instances are unresponsive',
 	timeline: [
 	    { date: 1481469000, what: 'A crontab notifies us Riak was restarted on some staging instance' },
