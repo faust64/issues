@@ -1,5 +1,17 @@
 var outages = [
     {
+	what: 'riak outage',
+	where: 'ice-bear',
+	why: 'Riak crashed on some Riak node, couple other instances are unresponsive',
+	timeline: [
+	    { date: 1481469000, what: 'A crontab notifies us Riak was restarted on some staging instance' },
+	    { date: 1481469120, what: 'We are unable to connect to two of our Riak nodes' },
+	    { date: 1481469180, what: 'UptimeRobot notifies us some staging service became unavailable' },
+	    { date: 1481469300, what: 'Same crontab notifies us Riak was restarted on our fourth instance' },
+	    { date: 1481469420, what: 'Our second node is now available, without having restarted it. Load goes through the roof, IOs' },
+	    { date: 1481469480, what: 'Same goes for our third node, that joined back in by itself' },
+	    { date: 1481469600, what: 'UptimeRobot confirms service is back up.' } ]
+    }, {
 	what: 'websocket outage',
 	where: 'ice-bear',
 	why: 'Broken release successfully deployed',
@@ -8,7 +20,7 @@ var outages = [
 	    { date: 1481310720, what: 'new version of peerio-server freezed, integration tests fixed to force loading that library we were missing' },
 	    { date: 1481311380, what: 'integration tests confirmed our new version is consistent, freezing/shipping a new version of peerio-backend' },
 	    { date: 1481312820, what: 'StatusCake is last to confirms service is back up' },
-	    { date: 1479212880, what: 'CodeDeploy acknowledges finishing deploying our fix to EC2.' } ]
+	    { date: 1481312880, what: 'CodeDeploy acknowledges finishing deploying our fix to EC2.' } ]
     }, {
 	what: 'replication outage',
 	where: 'productiondr',
