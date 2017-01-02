@@ -1,5 +1,33 @@
 var outages = [
     {
+	what: 'services flapping',
+	where: 'aws_prod',
+	why: 'Couple Riak instances are unresponsive',
+	timeline: [
+	    { date: 1483228260, what: 'Our site is unreachable from UptimeRobot servers. No alerts from our EC2-hosted nagios' },
+	    { date: 1483228320, what: 'Site shows back up' },
+	    { date: 1483229700, what: 'Site is unreachable from UptimeRobot' },
+	    { date: 1483229820, what: 'Site shows back up' },
+	    { date: 1483230780, what: 'Piwik is unreachable from UptimeRobot' },
+	    { date: 1483230840, what: 'Piwik shows back up' },
+	    { date: 1483246500, what: 'Piwik is unreachable from UptimeRobot' },
+	    { date: 1483246560, what: 'Piwik shows back up' },
+	    { date: 1483268400, what: 'All services affected are served through CloudFlare, see <a href="https://blog.cloudflare.com/how-and-why-the-leap-second-affected-cloudflare-dns/" target="_blank">corresponding blog post</a>.' } ]
+    }, {
+	what: 'services flapping',
+	where: 'productiondr',
+	why: 'Couple Riak instances are unresponsive',
+	timeline: [
+	    { date: 1483228200, what: 'Our inferno service is unreachable from UptimeRobot servers. No alerts from our EC2-hosted nagios' },
+	    { date: 1483228260, what: 'Inferno shows back up' },
+	    { date: 1483228560, what: 'Inferno is unreachable from UptimeRobot' },
+	    { date: 1483228620, what: 'Inferno shows back up' },
+	    { date: 1483229040, what: 'Inferno is unreachable from UptimeRobot' },
+	    { date: 1483229100, what: 'Inferno shows back up' },
+	    { date: 1483229400, what: 'Inferno is unreachable from UptimeRobot' },
+	    { date: 1483229460, what: 'Inferno shows back up' },
+	    { date: 1483268400, what: 'All services affected are served through CloudFlare, see <a href="https://blog.cloudflare.com/how-and-why-the-leap-second-affected-cloudflare-dns/" target="_blank">corresponding blog post</a>.' } ]
+    }, {
 	what: 'riak outage',
 	where: 'ice-bear',
 	why: 'Couple Riak instances are unresponsive',
@@ -163,7 +191,7 @@ var outages = [
     }, {
 	what: 'riak partial outage',
 	where: 'aws_prod',
-	why: 'unscheduled termination of one of our riak node, with no real incidence on production',
+	why: 'unscheduled termination of a riak node, with no real incidence on production',
 	timeline: [
 	    { date: 1474136700, what: 'nagios reports a couple socket timeouts reaching one of our riak node, before reporting us that instance was down' },
 	    { date: 1474136880, what: 'new instance is listed as starting on aws console' },
@@ -256,7 +284,7 @@ var outages = [
     }, {
 	what: 'public blobs partial outage',
 	where: 'aws_prod',
-	why: 'packet losses one of our loadbalancer serving blob.peerio.com (files)',
+	why: 'packet losses to one of our loadbalancer serving blob.peerio.com (files)',
 	timeline: [
 	    { date: 1468253880, what: 'icinga2 reports several probes recovering on one of our front balancer serving blob.peerio.com' },
 	    { date: 1468253940, what: 'everything looks fine, keeping a top running in doubt' },
