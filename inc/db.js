@@ -2,7 +2,7 @@ var outages = [
     {
 	what: 'services flapping',
 	where: 'aws_prod',
-	why: 'Couple Riak instances are unresponsive',
+	why: 'CloudFlare Leap-Second outage',
 	timeline: [
 	    { date: 1483228260, what: 'Our site is unreachable from UptimeRobot servers. No alerts from our EC2-hosted nagios' },
 	    { date: 1483228320, what: 'Site shows back up' },
@@ -16,7 +16,7 @@ var outages = [
     }, {
 	what: 'services flapping',
 	where: 'productiondr',
-	why: 'Couple Riak instances are unresponsive',
+	why: 'CloudFlare Leap-Second outage',
 	timeline: [
 	    { date: 1483228200, what: 'Our inferno service is unreachable from UptimeRobot servers. No alerts from our EC2-hosted nagios' },
 	    { date: 1483228260, what: 'Inferno shows back up' },
