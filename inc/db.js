@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 'update service unavailable',
+	where: 'staging',
+	why: 'GitHub outage',
+	timeline: [
+	    { date: 1484208480, what: 'StatusCake warns us our code update site is unreachable' },
+	    { date: 1484212380, what: 'StatusCake confirms our code update site is back up' },
+	    { date: 1484226720, what: 'Waking up, nothing much to do, GitHub status page shows their app server was down this morning. Now back up.' } ]
+    }, {
 	what: 'services flapping',
 	where: 'aws_prod',
 	why: 'CloudFlare Leap-Second outage',
