@@ -1,7 +1,16 @@
 var outages = [
     {
+	what: 'websocket outage',
+	where: 'ice-bear',
+	why: 'GitHub outage',
+	timeline: [
+	    { date: 1485626040, what: 'UptimeRobot warns us our websocket service is returning with 500 errors' },
+	    { date: 1485626100, what: 'Checking, it appears a colleague is uploading files, and used up all available space in our single worker temporary chunks storage, which eventually marked itself unhealthy' },
+	    { date: 1485626160, what: 'Purged chunks from our worker, health check is now returning with a network error, which is due to some service flapping or unavailable for a few minutes - our chunks. Waiting for our worker to mark itself healthy back' },
+	    { date: 1485626760, what: 'UptimeRobot & StatusCake confirmed our websocket service is back up.' } ]
+    }, {
 	what: 'update service unavailable',
-	where: 'staging',
+	where: 'ice-bear',
 	why: 'GitHub outage',
 	timeline: [
 	    { date: 1484208480, what: 'StatusCake warns us our code update site is unreachable' },
