@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'updates intermittent outage',
+	where: 'ice-bear',
+	why: 'Nuts losing connection to GitHub',
+	timeline: [
+	    { date: 1487512860, what: 'Nagios warns us our websocket service is returning with 502 errors' },
+	    { date: 1487512920, what: 'Nuts logs are showing failures to connect to GitHub, service is mostly up, yet flapping from time to time' },
+	    { date: 1487515440, what: 'Failures are occuring on a single worker, raising frequency, restarting Nuts processes' },
+	    { date: 1487515500, what: 'UptimeRobot and Nagios stopped flapping.' } ]
+    }, {
 	what: 'websocket outage',
 	where: 'ice-bear',
 	why: 'GitHub outage',
