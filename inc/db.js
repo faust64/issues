@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 's3 and codedeploy outage, with no real incidence on production',
+	where: 'aws_prod',
+	why: 's3 outage on us-east-1',
+	timeline: [
+	    { date: 1488310500, what: 'We start noticing mentions of s3 being unavailable, and could confirm codedeploy was no longer able to perform, nor would we be able to start new instances. Production, IceBear, Staging and Labs are affected, DR isn not' },
+	    { date: 1488321360, what: 'AWS s3 is mostly back, although we are missing some files. Nothing critical, we should be able to start new instances already' },
+	    { date: 1488332280, what: 'CodeDeploy is back, missing files have been uploaded back, we are still unable to drop some empty folder - that was not here before outage. Turns out my Basic support plan does not allow me to open a technical support request. I guess it would stay like this...' } ]
+    }, {
 	what: 'updates intermittent outage',
 	where: 'ice-bear',
 	why: 'Nuts losing connection to GitHub',
