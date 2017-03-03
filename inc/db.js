@@ -8,6 +8,12 @@ var outages = [
 	    { date: 1488321360, what: 'AWS s3 is mostly back, although we are missing some files. Nothing critical, we should be able to start new instances already' },
 	    { date: 1488332280, what: 'CodeDeploy is back, missing files have been uploaded back, we are still unable to drop some empty folder - that was not here before outage. Turns out my Basic support plan does not allow me to open a technical support request. I guess it would stay like this...' } ]
     }, {
+	what: 'Cloudbleed Aftermaths',
+	where: 'aws_prod',
+	why: 'Cloudbleed',
+	timeline: [
+	    { date: 1487887260, what: 'On February 23rd, <a href="https://blog.cloudflare.com/incident-report-on-memory-leak-caused-by-cloudflare-parser-bug/" target="_blank">Cloudflare discloses Cloudbleed</a>, a bug introduced on 2016 September 22nd. Only 180 sites would have been affected, until February 13th. Then, due to an update, the problem would have reached over 6.000 sites, and was triggered over a million times. This bug was reported by <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=1139" target="_blank">Google Project Zero</a> team on February 17th and fixed within a few hours.<br/>In regards to Peerio, offering with end-to-end encryption, we do not rely on HTTPs to ensure customers communications privacy. Every data you fetch from and store to Peerio services is encrypted using your key pair. For the record, our API specification is available <a href="https://github.com/PeerioTechnologies/peerio-client/blob/master/SPECIFICATION.md" target="_blank">on GitHub</a>.<br/>Cloudflare latter <a href="https://blog.cloudflare.com/quantifying-the-impact-of-cloudbleed" target="_blank">confirmed Cloudbleed most likely was not exploited</a>. Whereas we can confirm we did not record any abusive accesses to our services.' } ]
+    }, {
 	what: 'updates intermittent outage',
 	where: 'ice-bear',
 	why: 'Nuts losing connection to GitHub',
