@@ -57,3 +57,25 @@ body {
     padding: 1px;
     text-align: right;
 }
+
+#timenav {
+    font-size: 80%;
+}
+
+#navleft {
+    text-align: right;
+    width: 6%;
+}
+
+#navcenter {
+    width: 6%;
+}
+
+#navright {
+    text-align: left;
+    width: 6%;
+}
+
+#navpadding {
+    width: 82%;
+}
