@@ -49,33 +49,34 @@ function dateformat(how, when, since) {
 
 function populate(where, howmuch, startwith) {
     var page = '<table>', container = document.getElementById('container'),
-	filtered = new Array();
+	filtered = new Array(), nav;
 
     for (var i = 0; i < outages.length; i++)
 	if (where == 'all' || where == outages[i].where)
 	    filtered.push(outages[i]);
 
     if (filtered.length - 1 > howmuch) {
-	page += '<tr><td id=\'navleft\'>';
+	nav = '<tr><td id=\'navleft\'>';
 	if (startwith > 0) {
 	    var to = (startwith - howmuch >= 0 ? startwith - howmuch : 0);
-	    page += '<a onclick=\'populate("' + where + '", ' + howmuch + ', ' + to + ');\'>&lt;</a>';
+	    nav += '<a id=\'timenav\' onclick=\'populate("' + where + '", ' + howmuch + ', ' + to + ');\'>&lt;&lt;&lt;</a>';
 	} else {
-	    page += '&nbsp;'
+	    nav += '&nbsp;'
 	}
-	page += '</td><td=id=\'navcenter\'>&nbsp;</td><td id=\'navright\'>';
+	nav += '</td><td id=\'navcenter\'>&nbsp;</td><td id=\'navright\'>';
 	if (startwith + howmuch < filtered.length - 1) {
 	    var to = startwith + howmuch;
-	    page += '<a onclick=\'populate("' + where + '", ' + howmuch + ', ' + to + ');\'>&gt;</a>';
+	    nav += '<a id=\'timenav\' onclick=\'populate("' + where + '", ' + howmuch + ', ' + to + ');\'>&gt;&gt;&gt;</a>';
 	} else {
-	    page += '&nbsp;'
+	    nav += '&nbsp;'
 	}
-	page += '</td></tr>';
+	nav += '</td><td id=\'navpadding\' colspan=2>&nbsp;</td></tr>';
+	page += nav;
     }
 
     for (var x = startwith;
 	(x < filtered.length && x - startwith < howmuch); x++) {
-	page += '<tr><td id=\'outage\' rowspan=\''
+	page += '<tr><td colspan=3 id=\'outage\' rowspan=\''
 	     +  (filtered[x].timeline.length + 1) + '\'><p id=\'title\'>'
 	     +  filtered[x].what + '</p><p id=\'maindate\'>'
 	     +  dateformat('absolute', filtered[x].timeline[0].date)
@@ -92,6 +93,11 @@ function populate(where, howmuch, startwith) {
 	}
 	page += '</tr>';
     }
+
+    if (filtered.length - 1 > howmuch) {
+	page += nav;
+    }
+
     page += '</table>';
 
     container.innerHTML = page;
