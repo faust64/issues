@@ -1,2 +1,2 @@
 test:
-	js -c ./inc/db.js
+	node -c ./inc/db.js
