@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'Websocket, Files & Ghost outage',
+	where: 'staging',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1492120680, what: 'StatusCake reports our Websocket service is unavailable' },
+	    { date: 1492120860, what: 'Our Riak loadbalancer instance is unresponsive, stopping it from EC2 console' },
+	    { date: 1492122060, what: 'Instance shows stopped, starting it back' },
+	    { date: 1492122180, what: 'Haproxy is back healthy, restarting NodeJS processes' },
+	    { date: 1492122480, what: 'All monitoring back to green.' } ]
+    }, {
 	what: 's3 and codedeploy outage, with no real incidence on production',
 	where: 'aws_prod',
 	why: 's3 outage on us-east-1',
