@@ -1,2 +1,2 @@
 test:
-	node -c ./inc/db.js
+	node -c ./inc/db.js && echo OK || echo FAIL
