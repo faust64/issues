@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 'IPSEC gateway unavailable',
+	where: 'aws_prod',
+	why: 'unscheduled instance reboot',
+	timeline: [
+	    { date: 1495549440, what: 'IPSEC gateway starts rebooting, without any of us having scheduled it' },
+	    { date: 1495549560, what: 'Instance is back up, IPSEC tunnels as well, Icinga notifies us of instance reboot' },
+	    { date: 1495549740, what: 'Icinga back to green.' } ]
+    }, {
 	what: 'IceBear Balancers partial outage',
 	where: 'productiondr',
 	why: 'unscheduled termination of some Haproxy node',
