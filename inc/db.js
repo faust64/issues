@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'IceBear Balancers partial outage',
+	where: 'productiondr',
+	why: 'unscheduled termination of some Haproxy node',
+	timeline: [
+	    { date: 1495773780, what: 'Icinga reports one of our IceBear balancers is down. IceBear being a new set of services we should release any day, these had no implications on Peerio public services' },
+	    { date: 1495774200, what: 'We receive confirmation our ASG did terminate the faulty instance and replaced it by a new one. Ansible deployment starting' },
+	    { date: 1495774440, what: 'Done applying haproxy playbook, balancer is back up, new Route53 records and health checks registered. Main ansible playbook is now being applied' },
+	    { date: 1495776000, what: 'Done applying main playbook' },
+	    { date: 1495794120, what: 'Purged Route53 Records and Health Checks from references to the balancer that got terminated.' } ]
+    }, {
 	what: 'IPSEC gateway unavailable',
 	where: 'aws_prod',
 	why: 'unscheduled instance reboot',
