@@ -1,5 +1,22 @@
 var outages = [
     {
+	what: 'riak outage',
+	where: 'ice-bear',
+	why: 'One unresponsive Riak instance and two crashed processes',
+	timeline: [
+	    { date: 1495922220, what: 'Nagios starts to notify us about some Riak process not responding' },
+	    { date: 1495922280, what: 'New alerts notifying about an other Riak process not responding, and a third node not responding to ssh at all, UptimeRobot confirms our production front services are now showing unhealthy' },
+	    { date: 1495922340, what: 'UptimeRobot confirms IceBear services are now back online: Route53 successfully failed over to DR' },
+	    { date: 1495922640, what: 'StatusCake confirms our IceBear services on production are down' },
+	    { date: 1495939560, what: 'Recovering my access to internet, I start reading through nagios notifications and restart Riak on the first node that failed' },
+	    { date: 1495939680, what: 'First node back, restarting Riak on the second node' },
+	    { date: 1495939800, what: 'Second node back, idenfied our unresponsive instance, shutting it down from AWS console' },
+	    { date: 1495940100, what: 'Instance shows as shut down, now booting it back' },
+	    { date: 1495940280, what: 'Nagios confirms our cluster is healthy back, although replication is still late' },
+	    { date: 1495940520, what: 'Route53 health check confirm our production services are healthy' },
+	    { date: 1495940580, what: 'StatusCake confirms our production IceBear services are healthy' },
+	    { date: 1495941600, what: 'Replication back to green, all our probes show healthy.' } ]
+    }, {
 	what: 'IceBear Balancers partial outage',
 	where: 'productiondr',
 	why: 'unscheduled termination of some Haproxy node',
