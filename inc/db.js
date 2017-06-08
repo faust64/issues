@@ -15,7 +15,11 @@ var outages = [
 	    { date: 1495940280, what: 'Nagios confirms our cluster is healthy back, although replication is still late' },
 	    { date: 1495940520, what: 'Route53 health check confirm our production services are healthy' },
 	    { date: 1495940580, what: 'StatusCake confirms our production IceBear services are healthy' },
-	    { date: 1495941600, what: 'Replication back to green, all our probes show healthy.' } ]
+	    { date: 1495941600, what: 'Replication back to green, all our probes show healthy' },
+	    { date: 1496012400, what: 'After receiving several notifications from Icinga, regarding unusually high CPU usage on our production Riak cluster, starting a new cluster using larger instances' },
+	    { date: 1496056740, what: 'Still receiving CPU usage alerts: forcing DNS failover to DR, shutting down replication between initial cluster an DR cluster, setting up replication between DR cluster and new production cluster' },
+	    { date: 1496065440, what: 'Finishing to swap our Riak cluster, restoring DNS configuration routing clients to our Production setup' },
+	    { date: 1496067300, what: 'First successful login on Production, we should be done with Riak, shutting down former cluster.' } ]
     }, {
 	what: 'IceBear Balancers partial outage',
 	where: 'productiondr',
