@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'riakcs partial outage',
+	where: 'staging',
+	why: 'One unresponsive RiakCS instance',
+	timeline: [
+	    { date: 1497303000, what: 'Nagios notifies us a RiakCS went down' },
+	    { date: 1497303360, what: 'Ansible notifies us a replacement node is booting' },
+	    { date: 1497304920, what: 'Ansible notifies us our new RiakCS instance is ready' },
+	    { date: 1497305400, what: 'Updated plan dropping faulty node and adding the new one.' } ]
+    }, {
 	what: 'riak outage',
 	where: 'ice-bear',
 	why: 'One unresponsive Riak instance and two crashed processes',
