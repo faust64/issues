@@ -1,5 +1,18 @@
 var outages = [
     {
+	what: 'openvpn outage',
+	where: 'staging',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1497365400, what: 'Nagios notifies us our OpenVPN gateway went down, dev and management accesses are down' },
+	    { date: 1497365580, what: 'From AWS console, shutting down instance' },
+	    { date: 1497365640, what: 'OpenVPN instance was not using an Elastic IP, which means we would have to update our client configurations. Requesting an Elastic IP, to avoid further modifications' },
+	    { date: 1497366120, what: 'Instance shows stopped, starting it back' },
+	    { date: 1497366180, what: 'Assigning new IP to OpenVPN instance' },
+	    { date: 1497366300, what: 'New instance back up. Reconfiguring IPSEC tunnels taking our new public IP into accounts' },
+	    { date: 1497366840, what: 'IPSEC tunnels back up, notifying coworkers of configuration change (no DNS to that service)' },
+	    { date: 1497384000, what: 'last IPSEC flap recovered by corresponding crontab, so far so good.' } ]
+    }, {
 	what: 'riakcs partial outage',
 	where: 'staging',
 	why: 'One unresponsive RiakCS instance',
