@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'riak outage',
+	where: 'productiondr',
+	why: 'unscheduled instance reboot',
+	timeline: [
+	    { date: 1498376220, what: 'Nagios notifies us one of our Riak node went down' },
+	    { date: 1498377780, what: 'Nagios notifies us instance is back up, and was rebooted' },
+	    { date: 1498378380, what: 'Most warnings cleared, although Riak refuses to start. Every five minutes, a cron job notifies us it failed restarting Riak' },
+	    { date: 1498390080, what: 'No one seems to have noticed, bailing out on a wedding and jumping into the first train back home' },
+	    { date: 1498414080, what: 'Restarting Riak service twice in a row was enough to get it back up. Weirdly enough, our cron job already runs that command 3 times in a row - as it is known to fail, and Basho blames it on some Systemctl bug in Debian Jessie, without having provided us with any kind of fix.' } ]
+    }, {
 	what: 'openvpn outage',
 	where: 'staging',
 	why: 'unresponsive EC2 instance',
