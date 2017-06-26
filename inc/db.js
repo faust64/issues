@@ -1,5 +1,30 @@
 var outages = [
     {
+	what: 'mysql outage',
+	where: 'awsprod',
+	why: 'scheduled instance reboot, then failing health checks',
+	timeline: [
+	    { date: 1498450980, what: 'Nagios notifies us one of our MySQL instance went down. AWS did warn us a reboot was scheduled there, within that time frame' },
+	    { date: 1498451100, what: 'Instance is back up, although our NodeJS health checks start complaining about MySQL being unavailable - which is weird, considering we have two nodes in Production, and an ELB that should deal with hosts being unavailable' },
+	    { date: 1498468980, what: 'My own nagios is now warning me that both Shark balancers are showing unhealthy on Production. StatusCake and UptimeRobot confirm that account.peerio.com is still available via our DR setup' },
+	    { date: 1498473120, what: 'Giving this a look while coping with our Riak outage on DR, I could confirm the MySQL Health Check service was crashed on both Production node. Although I was unable to restart it' },
+	    { date: 1498474200, what: 'Having patched our MySQL Health Check service scripts, I was able to restart said service' },
+	    { date: 1498474260, what: 'Production ELB has now marked both our MySQL nodes as healthy' },
+	    { date: 1498474380, what: 'Nagios confirms our Shark workers have acknowledged their database being back' },
+	    { date: 1498475040, what: 'My own nagios confirms our Production Shark balancers are showing back healthy.' } ]
+    }, {
+	what: 'riak outage',
+	where: 'productiondr',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1498468920, what: 'Nagios notifies us one of our Riak node went down' },
+	    { date: 1498470780, what: 'Waking up and connecting to AWS console, EC2 instance is indeed showing as unresponsive. Stopping it' },
+	    { date: 1498471380, what: 'Instance is still listed as Stopping. Requesting a force-stop' },
+	    { date: 1498471980, what: 'Instance is still listed as Stopping. Requesting a force-stop' },
+	    { date: 1498472760, what: 'Instance showing as stopped, now starting it back' },
+	    { date: 1498472940, what: 'Connecting to our rebooted instance, I could confirm once again, Riak did not start. The first start returns an error, the second successfully start Riak' },
+	    { date: 1498473420, what: 'Nagios confirms our Riak service is healthy back on DR.' } ]
+    }, {
 	what: 'riak outage',
 	where: 'productiondr',
 	why: 'unscheduled instance reboot',
