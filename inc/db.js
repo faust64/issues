@@ -1,5 +1,16 @@
 var outages = [
     {
+	what: 'IceBear Balancers partial outage',
+	where: 'productiondr',
+	why: 'unscheduled termination of some Haproxy node',
+	timeline: [
+	    { date: 1501106160, what: 'Nagios notifies us a balancer stopped responding - a second one still being alive, DR was not active: no incidence for end users' },
+	    { date: 1501106220, what: 'From AWS console, instance shows unhealthy. ASG did not repliace it though, forcing faulty instance termination' },
+	    { date: 1501106340, what: 'New instance listed in AWS console' },
+	    { date: 1501106520, what: 'Receiving a Slack notification confirming Ansible started applying our HAproxy playbook on that new instance' },
+	    { date: 1501106760, what: 'HAproxy role applied, service is back up' },
+	    { date: 1501108200, what: 'Ansible done applying main playbook, nagios probes all back to green.' } ]
+    }, {
 	what: 'redis outage',
 	where: 'awsprod',
 	why: 'keyspace exhaustion',
