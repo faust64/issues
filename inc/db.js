@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'redis outage',
+	where: 'awsprod',
+	why: 'keyspace exhaustion',
+	timeline: [
+	    { date: 1501000920, what: 'Nagios notifies us our NodeJS processe are starting to show unhealthy' },
+	    { date: 1501000980, what: 'Logs are showing that redis memory usage is reaching its limits. Issue was known of, a cron job was added a while ago, although it did not reach prod yet' },
+	    { date: 1501001160, what: 'UptimeRobot reports our Production to be unavailable. DR should still be reachable, and have taken over' },
+	    { date: 1501001340, what: 'Having uploaded our fix from staging to production and executing it, our Redis backend quickly started refusing new connections and closing existing ones. Our whole production crashed. Cleanup was partial when I managed to kill it, backend devs are notified, pending some actual fix' },
+	    { date: 1501001760, what: 'NodeJS processes are all back, UptimeRobot and StatusCake confirmed Production is available.' } ]
+    }, {
 	what: 'mysql outage',
 	where: 'awsprod',
 	why: 'scheduled instance reboot, then failing health checks',
