@@ -1,11 +1,20 @@
 var outages = [
     {
+	what: 'Ceph RadosGateway partial outage',
+	where: 'staging',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1501551540, what: 'Nagios notifies us a Rados Gateway stopped responding - a second one still being alive: no incidence for end users' },
+	    { date: 1501551780, what: 'From AWS console, instance shows unhealthy. Forcing it to stop' },
+	    { date: 1501552020, what: 'Instance shows as stopped, starting it back' },
+	    { date: 1501552200, what: 'Nagios probes all back to green.' } ]
+    }, {
 	what: 'IceBear Balancers partial outage',
 	where: 'productiondr',
 	why: 'unscheduled termination of some Haproxy node',
 	timeline: [
 	    { date: 1501106160, what: 'Nagios notifies us a balancer stopped responding - a second one still being alive, DR was not active: no incidence for end users' },
-	    { date: 1501106220, what: 'From AWS console, instance shows unhealthy. ASG did not repliace it though, forcing faulty instance termination' },
+	    { date: 1501106220, what: 'From AWS console, instance shows unhealthy. ASG did not replace it though, forcing faulty instance termination' },
 	    { date: 1501106340, what: 'New instance listed in AWS console' },
 	    { date: 1501106520, what: 'Receiving a Slack notification confirming Ansible started applying our HAproxy playbook on that new instance' },
 	    { date: 1501106760, what: 'HAproxy role applied, service is back up' },
