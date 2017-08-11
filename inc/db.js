@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'DR outage',
+	where: 'productiondr',
+	why: 'azure service partially unavailable',
+	timeline: [
+	    { date: 1502443740, what: 'Nagios notifies us all our DR workers are returning with a 500 error' },
+	    { date: 1502444040, what: 'According to nagios, probes are back to green' },
+	    { date: 1502445540, what: 'Nagios notifies us again, 500 errors are back' },
+	    { date: 1502445780, what: 'Again, problem solved itself' },
+	    { date: 1502446320, what: 'Waking up, our NodeJS logs show that, from that DR setup, Azure service is likely to get unavailable. There is not much I can do...' } ]
+    }, {
 	what: 'Ceph RadosGateway partial outage',
 	where: 'staging',
 	why: 'unresponsive EC2 instance',
