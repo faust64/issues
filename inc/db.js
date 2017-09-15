@@ -1,5 +1,13 @@
 var outages = [
     {
+	what: 'Scheduled workers restart',
+	where: 'awsprod',
+	why: 'shipping a new client release, preventing former copies to connect',
+	timeline: [
+	    { date: 1505505180, what: 'Shutting down frontend workers, forcing running sessions to close' },
+	    { date: 1505505240, what: 'Deprecating older client versions, while releasing them to AppStore, PlayStore and GitHub' },
+	    { date: 1505505360, what: 'Restarting frontend workers.' } ]
+    }, {
 	what: 'DR outage',
 	where: 'productiondr',
 	why: 'azure service partially unavailable',
