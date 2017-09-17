@@ -1,5 +1,16 @@
 var outages = [
     {
+	what: 'websocket partial outage',
+	where: 'awsprod',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1505623800, what: 'HighWayToHell notifies us one of our front workers services are unreachable' },
+	    { date: 1505623860, what: 'Corresponding worker does not respond to ping, connecting to AWS console' },
+	    { date: 1505623920, what: 'Nagios confirms our worker is unreachable' },
+	    { date: 1505624100, what: 'Having logged into AWS console, instance shows unresponsive. No replacement instance booting, detaching faulty worker from its ASG and shutting it down' },
+	    { date: 1505625900, what: 'Instance shows stopped, starting it back up' },
+	    { date: 1505626260, what: 'HighWayToHell and Nagios confirm our worker is back up, re-attaching EC2 instance to its ASG.' } ]
+    }, {
 	what: 'Scheduled workers restart',
 	where: 'awsprod',
 	why: 'shipping a new client release, preventing former copies to connect',
