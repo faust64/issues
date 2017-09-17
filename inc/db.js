@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'backup storage partial outage',
+	where: 'staging',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1505668020, what: 'Nagios warns us a Ceph OSD became unreachable' },
+	    { date: 1505668380, what: 'Having logged into AWS console, instance shows unresponsive, shutting it down' },
+	    { date: 1505669220, what: 'Instance shows stopped, starting it back up' },
+	    { date: 1505669520, what: 'Nagios confirms our OSD is back up and Ceph health is back to green.' } ]
+    }, {
 	what: 'websocket partial outage',
 	where: 'awsprod',
 	why: 'unresponsive EC2 instance',
