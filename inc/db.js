@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'accounts management portal partial outage',
+	where: 'productiondr',
+	why: 'network losses on us-west-1',
+	timeline: [
+	    { date: 1505998680, what: 'Nagios warns us a shark worker is unhealthy' },
+	    { date: 1505998800, what: 'Back to green. Checking logs, we can see MySQL was unreachable for a little while' },
+	    { date: 1505998920, what: 'MySQL logs do not show anything unusual' },
+	    { date: 1505999400, what: 'Another shark worker showing unhealthy, again MySQL was marked unreachable' },
+	    { date: 1505999820, what: 'Service marked back healthy.' } ]
+    }, {
 	what: 'backup storage partial outage',
 	where: 'staging',
 	why: 'unresponsive EC2 instance',
