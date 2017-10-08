@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'websocket partial outage',
+	where: 'awsprod',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1507480380, what: 'Nagios warns us a front loadbalancer is unreachable, production is now being served by a single availability zone' },
+	    { date: 1507480500, what: 'Having connected to AWS console, my ping to that loadbalancer started receiving replies' },
+	    { date: 1507480620, what: 'Nagios confirms everything is back up, although warns us loadlabalcer just rebooted' },
+	    { date: 1507480860, what: 'Checking syslog messages, some files are corrupted and missing messages, while non-syslog logs do show service being terminated via init. Munin does not show any unexpected activity, unclear what went on...' },
+	    { date: 1507481160, what: 'Nagios back to green.' } ]
+    }, {
 	what: 'accounts management portal partial outage',
 	where: 'productiondr',
 	why: 'network losses on us-west-1',
