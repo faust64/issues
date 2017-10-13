@@ -1,6 +1,14 @@
 var outages = [
     {
 	what: 'websocket partial outage',
+	where: 'productiondr',
+	why: 'network losses to azure on us-west-1',
+	timeline: [
+	    { date: 1507849920, what: 'Nagios warns us a blob worker is unhealthy' },
+	    { date: 1507849980, what: 'Checking logs, we can see Azure was unreachable for a little while' },
+	    { date: 1507850100, what: 'Restarting processes in doubt, marking service healthy.' } ]
+    }, {
+	what: 'websocket partial outage',
 	where: 'awsprod',
 	why: 'unresponsive EC2 instance',
 	timeline: [
