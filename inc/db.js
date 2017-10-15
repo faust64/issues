@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'riak outage',
+	where: 'productiondr',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1508025960, what: 'Nagios notifies us one of our Riak node went down, connecting to AWS' },
+	    { date: 1508026200, what: 'Stopping instance' },
+	    { date: 1508026440, what: 'Instance shows stopped, restarting it' },
+	    { date: 1508026500, what: 'Riak back up, Nagios starts to confirm service is back up' },
+	    { date: 1508026740, what: 'All probes back to green.' } ]
+    }, {
 	what: 'websocket partial outage',
 	where: 'productiondr',
 	why: 'network losses to azure on us-west-1',
