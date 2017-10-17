@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'OldBear riak outage',
+	where: 'aws_prod',
+	why: 'unresponsive EC2 instance',
+	timeline: [
+	    { date: 1508207100, what: 'AWS emails us regarding some hardware issue involving a server hosting one of our Riak node serving OldBear, we originally had until October 31st to schedule a reboot' },
+	    { date: 1508212920, what: 'Nagios notifies us our Riak instance just went down' },
+	    { date: 1508212980, what: 'We were expecting this: shrinking down our cluster to 3 nodes. As OldBear is scheduled for termination by 2018, and since half of our active users did migrate, we should not need to spawn a replacement node' },
+	    { date: 1508213100, what: 'Faulty instance successfully removed from our cluster, Nagios back to green.' } ]
+    }, {
 	what: 'riak outage',
 	where: 'productiondr',
 	why: 'unresponsive EC2 instance',
