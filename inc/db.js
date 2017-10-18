@@ -1,5 +1,25 @@
 var outages = [
     {
+	what: 'DR outage',
+	where: 'productiondr',
+	why: 'packet losses on us-west-2',
+	timeline: [
+	    { date: 1508315760, what: 'Our IPSEC gateway in production notifies us (slack) that our tunnel to DR was just restarted' },
+	    { date: 1508315880, what: 'Our IPSEC gateway in production notifies us that our tunnel to DR was just restarted' },
+	    { date: 1508316000, what: 'Our IPSEC gateway in production notifies us that our tunnel to DR was just restarted' },
+	    { date: 1508316001, what: 'Our IPSEC gateway in staging notifies us that our tunnel to DR was just restarted' },
+	    { date: 1508316060, what: 'Our IPSEC gateway in production notifies us that our tunnel to DR was just restarted' },
+	    { date: 1508316120, what: 'Our IPSEC gateway in production notifies us that our tunnel to DR was just restarted' },
+	    { date: 1508316120, what: 'Nagios kicks in, Production monitor reports DR services as unreachable, and vice-versa' },
+	    { date: 1508316660, what: 'Slack getting spammed by Nagios eventually pulled me out of my sleep. At first sight: even without passing through IPSEC tunnels, I am no longer able to SSH to our DR IPSEC gateway public IP: connecting to AWS console' },
+	    { date: 1508316840, what: 'Being logged into AWS, we can confirm that all our instances in DR are listed as healthy. Meanwhile, my ssh requests to our IPSEC gateway eventually started getting responses, ... IPSEC tunnel from Production to DR is properly running, cronjobs did what they had to do, although our tunnel from Staging to DR is refusing to start back, leading to most of our Slack notifications' },
+	    { date: 1508317020, what: 'StatusCake starts notifying us about our WebSocket and Blob webservices being unavailable on DR' },
+	    { date: 1508317080, what: 'UptimeRobot notifies us as well, meanwhile I could confirm that last issue has to do with our NodeJS processes considering Azure blob storage to be flappy, as we are still suffering from packet losses in and out of us-west-2' },
+	    { date: 1508317740, what: 'Network looks "stable enough" right now, restarting all NodeJS processes on DR, forcing our health checks history to forget about previous flaps' },
+	    { date: 1508317800, what: 'Our IPSEC tunnel connecting Staging to DR is back, for some reason, after forcing it down and up several times, ...' },
+	    { date: 1508318040, what: 'StatusCake starts confirming our DR services are back up' },
+	    { date: 1508319120, what: 'All our probes are showing back healthy, although we would keep a close eye on us-west-2 in the next hours, watching for network losses, ...' } ]
+    }, {
 	what: 'OldBear riak outage',
 	where: 'aws_prod',
 	why: 'unresponsive EC2 instance',
