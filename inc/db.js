@@ -1,5 +1,25 @@
 var outages = [
     {
+	what: 'websocket partial outage',
+	where: 'productiondr',
+	why: 'network losses to azure on us-west-2',
+	timeline: [
+	    { date: 1508598780, what: 'UptimeRobot starts notifying us regarding our DR websocket service returning with 500 errors' },
+	    { date: 1508598840, what: 'Problem is related to our workers not being able to consistently reach Azure blob storage service' },
+	    { date: 1508598900, what: 'Nagios notifying us as well' },
+	    { date: 1508599140, what: 'Monitoring is back to green.' } ]
+    }, {
+	what: 'DR partial outage',
+	where: 'productiondr',
+	why: 'unscheduled loadbalancer termination',
+	timeline: [
+	    { date: 1508589600, what: 'Receiving a Slack notification from a new loadbalancer booting' },
+	    { date: 1508589720, what: 'Could not figure out which instances was being replaced, all our loadbalancers are still reachable and seems to be working fine' },
+	    { date: 1508590320, what: 'Nagios warns us one of our loadbalancer has gone missing, corresponding SSH session is no longer responding' },
+	    { date: 1508590860, what: 'Ansible finished applying our HAproxy playbook to new loadbalancer, route53 records and health checks were properly registered' },
+	    { date: 1508591520, what: 'Done manually removing references to our former balancer from Route53 health checks & records' },
+	    { date: 1508592900, what: 'Ansible finished applying main playbooks to new loadbalancer.' } ]
+    }, {
 	what: 'DR outage',
 	where: 'productiondr',
 	why: 'packet losses on us-west-2',
@@ -41,7 +61,7 @@ var outages = [
     }, {
 	what: 'websocket partial outage',
 	where: 'productiondr',
-	why: 'network losses to azure on us-west-1',
+	why: 'network losses to azure on us-west-2',
 	timeline: [
 	    { date: 1507849920, what: 'Nagios warns us a blob worker is unhealthy' },
 	    { date: 1507849980, what: 'Checking logs, we can see Azure was unreachable for a little while' },
@@ -59,7 +79,7 @@ var outages = [
     }, {
 	what: 'accounts management portal partial outage',
 	where: 'productiondr',
-	why: 'network losses on us-west-1',
+	why: 'network losses on us-west-2',
 	timeline: [
 	    { date: 1505998680, what: 'Nagios warns us a shark worker is unhealthy' },
 	    { date: 1505998800, what: 'Back to green. Checking logs, we can see MySQL was unreachable for a little while' },
