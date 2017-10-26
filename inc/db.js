@@ -1,5 +1,14 @@
 var outages = [
     {
+	what: 'syslog collector stopped',
+	where: 'aws_prod',
+	why: 'unscheduled instance reboot',
+	timeline: [
+	    { date: 1509059220, what: 'Nagios starts notifying us regarding our production Logstash relay being unavailable' },
+	    { date: 1509059340, what: 'Confirmed host does not PING from our management VPN, connecting to AWS console to investigate further' },
+	    { date: 1509059940, what: 'Nagios notifies us host is back up. Connecting, its uptime confirmed host had rebooted' },
+	    { date: 1509060420, what: 'Nagios done marking that host services healthy.' } ]
+    }, {
 	what: 'websocket partial outage',
 	where: 'productiondr',
 	why: 'network losses to azure on us-west-2',
