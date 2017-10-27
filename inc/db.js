@@ -1,6 +1,17 @@
 var outages = [
     {
-	what: 'syslog collector stopped',
+	what: 'front balancer stopped responding',
+	where: 'staging',
+	why: 'unscheduled instance reboot',
+	timeline: [
+	    { date: 1509079740, what: 'Uptime Robot marked our Staging services down' },
+	    { date: 1509079800, what: 'Nagios warns us about our loadbalancer not responding' },
+	    { date: 1509080160, what: 'Having detached instance from its ASG, shutting it down from AWS console' },
+	    { date: 1509080700, what: 'Instance shows stopped on AWS console, starting it back up' },
+	    { date: 1509080820, what: 'HAproxy service back up, workers backends marked healthy' },
+	    { date: 1509081300, what: 'Nagios done marking our services healthy.' } ]
+    }, {
+	what: 'syslog collector stopped responding',
 	where: 'aws_prod',
 	why: 'unscheduled instance reboot',
 	timeline: [
