@@ -1,5 +1,15 @@
 var outages = [
     {
+	what: 'unscheduled instance reboot',
+	where: 'staging',
+	why: 'ceph monitor unreachable',
+	timeline: [
+	    { date: 1513323780, what: 'Nagios warns us a Ceph MON instance stopped responding to ICMP requests' },
+	    { date: 1513325940, what: 'Nagios notifies us our faulty instance is back up' },
+	    { date: 1513327320, what: 'Nagios confirms most our probes show healthy' },
+	    { date: 1513327980, what: 'Last checks confirming Ceph cluster is healthy back' },
+	    { date: 1513348860, what: 'Waking up, nothing much I can do, confirmed instance did reboot, unclear on the reason why. Running 3 MON, this failure had no implications on daily operations.' } ]
+    }, {
 	what: 'scheduled maintenance',
 	where: 'productiondr',
 	why: 'migrating database from riak to cassandra',
